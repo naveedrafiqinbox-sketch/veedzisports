@@ -11,34 +11,6 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Veedzi Sports Network">
 
-  <!-- Open Graph / Facebook / WhatsApp SEO -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://veedzisports.com/">
-  <meta property="og:title" content="Veedzi Sports - Live Cricket, Football & Sports Channels HD">
-  <meta property="og:description" content="Watch high quality live streams of Cricket, Football, Motorsport, Tennis & 24/7 sports channels on Veedzi Sports.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80">
-
-  <!-- Twitter Card SEO -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Veedzi Sports - Free Live Sports Streaming HD">
-  <meta name="twitter:description" content="Watch global live sports channels, cricket tournaments, and football matches free in HD.">
-
-  <!-- Schema.org Structured Data for Sports Events & Live Broadcast -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SportsEvent",
-    "name": "Live Sports Streaming Network - Veedzi Sports",
-    "description": "Watch live sports matches including Cricket, Football, Tennis and Motorsports on Veedzi Sports.",
-    "url": "https://veedzisports.com",
-    "organizer": {
-      "@type": "Organization",
-      "name": "Veedzi Sports",
-      "url": "https://veedzisports.com"
-    }
-  }
-  </script>
-
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -70,35 +42,20 @@
   </script>
 
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0F172A;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #475569;
-    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0F172A; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-    /* Pulse animation for live indicators */
     @keyframes pulse-fast {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
     }
-    .animate-live {
-      animation: pulse-fast 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
+    .animate-live { animation: pulse-fast 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
-    /* Responsive Aspect Ratio for Iframe Player */
     .aspect-video-container {
       position: relative;
-      padding-bottom: 56.25%; /* 16:9 ratio */
+      padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
     }
@@ -110,47 +67,25 @@
       height: 100%;
       border: 0;
     }
-
-    /* Ticker smooth animation */
-    .ticker-wrapper {
-      white-space: nowrap;
-      overflow: hidden;
-    }
-    .ticker-content {
-      display: inline-block;
-      animation: ticker 35s linear infinite;
-    }
-    .ticker-content:hover {
-      animation-play-state: paused;
-    }
-    @keyframes ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col">
 
-  <!-- ================= TOP AD BANNER SLOT (LEADERBOARD) ================= -->
+  <!-- TOP AD BANNER SLOT -->
   <div class="bg-slate-900 border-b border-slate-800 py-2 px-4 text-center text-xs">
     <div class="max-w-7xl mx-auto flex flex-col items-center justify-center">
       <div class="flex items-center justify-between w-full max-w-4xl text-slate-400 mb-1">
         <span class="text-[10px] uppercase tracking-wider font-semibold">Advertisement (Top Banner)</span>
         <span id="top-ad-timer" class="text-[10px] text-brand-accent">Rotates in: 15s</span>
       </div>
-      <!-- Ad Container -->
-      <div id="ad-slot-top" class="w-full max-w-[728px] h-[90px] bg-slate-800 border border-slate-700 rounded flex items-center justify-center overflow-hidden transition-all duration-500 shadow-md">
-        <!-- Rendered dynamically via JS -->
-      </div>
+      <div id="ad-slot-top" class="w-full max-w-[728px] h-[90px] bg-slate-800 border border-slate-700 rounded flex items-center justify-center overflow-hidden shadow-md"></div>
     </div>
   </div>
 
-  <!-- ================= HEADER & NAVIGATION ================= -->
+  <!-- HEADER -->
   <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        
-        <!-- Logo -->
         <div class="flex items-center space-x-3">
           <a href="#" class="flex items-center space-x-2">
             <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-emerald-400 rounded-lg flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-blue-500/20">
@@ -163,163 +98,236 @@
           </a>
         </div>
 
-        <!-- Desktop Navigation -->
         <nav class="hidden md:flex space-x-1 lg:space-x-2 font-medium text-sm">
-          <a href="#" onclick="filterMatches('all')" class="px-3 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-700 transition">Home</a>
-          <a href="#" onclick="filterMatches('Cricket')" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-baseball-bat-ball text-emerald-400"></i> Cricket</a>
-          <a href="#" onclick="filterMatches('Football')" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-futbol text-sky-400"></i> Football</a>
-          <a href="#" onclick="filterMatches('Tennis')" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-table-tennis-paddle-ball text-amber-400"></i> Tennis</a>
-          <a href="#" onclick="filterMatches('Formula 1')" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-flag-checkered text-red-500"></i> F1</a>
-          <a href="#channels-section" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">24/7 Channels</a>
+          <a href="#" onclick="filterMatches('all')" class="px-3 py-2 rounded-md bg-slate-800 text-white transition">Home</a>
+          <a href="#" onclick="filterMatches('Cricket')" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">Cricket</a>
+          <a href="#" onclick="filterMatches('Football')" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">Football</a>
+          <a href="#" onclick="filterMatches('Tennis')" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">Tennis</a>
+          <a href="#" onclick="filterMatches('Formula 1')" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">F1</a>
         </nav>
 
-        <!-- Right Side Action Buttons -->
         <div class="flex items-center space-x-3">
-          <!-- Ad Config Manager Button -->
           <button onclick="openAdModal()" class="bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 border border-amber-500/30 text-xs font-semibold px-3 py-2 rounded-lg flex items-center gap-2 transition">
             <i class="fa-solid fa-ad"></i>
             <span>Ad Manager</span>
           </button>
-          
-          <!-- Refresh Button -->
-          <button onclick="location.reload()" class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition" title="Refresh Streams">
+          <button onclick="location.reload()" class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition" title="Refresh">
             <i class="fa-solid fa-arrows-rotate"></i>
           </button>
-
-          <!-- Mobile menu button -->
-          <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg">
-            <i class="fa-solid fa-bars text-lg"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Nav Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-1">
-      <a href="#" onclick="filterMatches('all'); toggleMobileMenu();" class="block px-3 py-2 rounded-md bg-slate-800 text-white font-medium">Home</a>
-      <a href="#" onclick="filterMatches('Cricket'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-slate-300 hover:bg-slate-800 font-medium">Cricket Live</a>
-      <a href="#" onclick="filterMatches('Football'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-slate-300 hover:bg-slate-800 font-medium">Football Live</a>
-      <a href="#" onclick="filterMatches('Tennis'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-slate-300 hover:bg-slate-800 font-medium">Tennis</a>
-      <a href="#" onclick="filterMatches('Formula 1'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-slate-300 hover:bg-slate-800 font-medium">Formula 1</a>
-      <a href="#channels-section" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-slate-300 hover:bg-slate-800 font-medium">24/7 Channels</a>
-    </div>
-
-    <!-- LIVE TICKER BAR -->
-    <div class="bg-slate-950 border-t border-b border-slate-800/80 py-1.5 px-4 flex items-center text-xs overflow-hidden">
-      <div class="flex items-center gap-2 bg-red-600/20 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold uppercase tracking-wider shrink-0 mr-3">
-        <span class="w-2 h-2 rounded-full bg-red-500 animate-live"></span>
-        Live Ticker
-      </div>
-      <div class="ticker-wrapper flex-1 text-slate-300 font-medium">
-        <div class="ticker-content space-x-8">
-          <span>🏏 <strong class="text-white">IND vs AUS:</strong> Australia 245/4 (42.3 ov) - India won the toss & elected to bowl</span>
-          <span>⚽ <strong class="text-white">Real Madrid vs Barcelona:</strong> 2 - 1 (78') El Clasico Stream Live</span>
-          <span>🎾 <strong class="text-white">Wimbledon Final:</strong> Djokovic vs Alcaraz - Set 3 Tiebreak</span>
-          <span>🏎️ <strong class="text-white">F1 Grand Prix:</strong> Monza Qualifying - Live Stream Server 1 Active</span>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- ================= MAIN CONTENT CONTAINER ================= -->
+  <!-- MAIN CONTENT -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
-    
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       
-      <!-- LEFT / CENTER COLUMN (STREAM PLAYER + POPULAR MATCHES) - 8 COLS -->
+      <!-- PLAYER COLUMN -->
       <div class="lg:col-span-8 space-y-6">
-        
-        <!-- PLAYER CONTAINER -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
-          
-          <!-- Player Header -->
           <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-3">
-              <span id="current-category" class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold uppercase px-2 py-0.5 rounded">
-                Cricket
-              </span>
-              <h2 id="current-stream-title" class="text-sm sm:text-base font-bold text-white truncate max-w-[280px] sm:max-w-md">
-                India vs Australia - 3rd ODI Live Stream
-              </h2>
+              <span id="current-category" class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold uppercase px-2 py-0.5 rounded">Cricket</span>
+              <h2 id="current-stream-title" class="text-sm sm:text-base font-bold text-white truncate max-w-[280px]">India vs Australia - Live Stream</h2>
             </div>
-            
             <div class="flex items-center gap-1 text-xs">
-              <span class="text-slate-400 mr-1 hidden sm:inline">Servers:</span>
-              <button onclick="switchServer(1)" id="srv-1" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-semibold shadow hover:bg-emerald-500 transition">S1</button>
-              <button onclick="switchServer(2)" id="srv-2" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-semibold hover:bg-slate-700 transition">S2</button>
-              <button onclick="switchServer(3)" id="srv-3" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-semibold hover:bg-slate-700 transition">S3</button>
-              <button onclick="switchServer(4)" id="srv-4" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-semibold hover:bg-slate-700 transition">HD</button>
+              <span class="text-slate-400 mr-1">Servers:</span>
+              <button onclick="switchServer(1)" id="srv-1" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-semibold">S1</button>
+              <button onclick="switchServer(2)" id="srv-2" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">S2</button>
+              <button onclick="switchServer(3)" id="srv-3" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">S3</button>
             </div>
           </div>
 
-          <!-- Video Stream Area (Responsive 16:9 Container) -->
-          <div class="bg-black aspect-video-container relative group">
-            <iframe id="main-player" 
-                    src="https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig" 
-                    allowfullscreen 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-            </iframe>
-            
-            <!-- Stream Overlay Warning/Info badge -->
-            <div class="absolute top-3 left-3 bg-black/70 backdrop-blur text-slate-300 text-[11px] px-2.5 py-1 rounded-md border border-white/10 pointer-events-none flex items-center gap-2">
+          <div class="bg-black aspect-video-container relative">
+            <iframe id="main-player" src="https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT" allowfullscreen allow="autoplay"></iframe>
+            <div class="absolute top-3 left-3 bg-black/70 backdrop-blur text-slate-300 text-[11px] px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span id="player-status-text">Signal HD Stable (Server 1)</span>
-            </div>
-          </div>
-
-          <!-- Player Controls & Information Bar -->
-          <div class="p-3 bg-slate-900 border-t border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
-            <div class="flex items-center gap-3">
-              <span><i class="fa-solid fa-users text-slate-500"></i> <strong class="text-slate-200">24.5k</strong> Watching</span>
-              <span><i class="fa-solid fa-signal text-emerald-400"></i> 1080p @ 60fps</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <button onclick="reloadPlayer()" class="hover:text-white bg-slate-800 px-2.5 py-1 rounded border border-slate-700"><i class="fa-solid fa-rotate-right mr-1"></i> Reload Stream</button>
-              <button onclick="toggleFullscreen()" class="hover:text-white bg-slate-800 px-2.5 py-1 rounded border border-slate-700"><i class="fa-solid fa-expand mr-1"></i> Fullscreen</button>
+              <span id="player-status-text">Live Signal Active</span>
             </div>
           </div>
         </div>
 
-        <!-- ================= BELOW PLAYER AD BANNER SLOT ================= -->
+        <!-- AD SLOT PLAYER -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
           <div class="flex items-center justify-between text-slate-400 text-[10px] uppercase font-semibold mb-2">
-            <span>Advertisement (In-Content Banner)</span>
+            <span>Advertisement</span>
             <span id="player-ad-timer" class="text-brand-accent">Rotates in: 15s</span>
           </div>
-          <div id="ad-slot-player" class="w-full h-[100px] sm:h-[120px] bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center overflow-hidden">
-            <!-- Dynamic Ad Content -->
-          </div>
+          <div id="ad-slot-player" class="w-full h-[100px] bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center overflow-hidden"></div>
         </div>
 
-        <!-- LIVE MATCHES SCHEDULE / SWITCHER LIST -->
+        <!-- MATCHES LIST -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-          <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
-            <h3 class="text-base font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-tower-broadcast text-red-500"></i>
-              Live Sports Fixtures
-            </h3>
-            <span class="text-xs text-slate-400">Click any event to switch player stream</span>
-          </div>
-
-          <!-- Category Filter Tabs -->
-          <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-3 text-xs scrollbar-none">
-            <button onclick="filterMatches('all')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold whitespace-nowrap">All Matches</button>
-            <button onclick="filterMatches('Cricket')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold whitespace-nowrap">Cricket</button>
-            <button onclick="filterMatches('Football')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold whitespace-nowrap">Football</button>
-            <button onclick="filterMatches('Tennis')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold whitespace-nowrap">Tennis</button>
-            <button onclick="filterMatches('Formula 1')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold whitespace-nowrap">Motorsport</button>
-          </div>
-
-          <!-- Match List Items -->
-          <div id="matches-list" class="space-y-2.5">
-            <!-- Dynamic JavaScript injection of matches -->
-          </div>
+          <h3 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+            <i class="fa-solid fa-tower-broadcast text-red-500"></i> Live Sports Fixtures
+          </h3>
+          <div id="matches-list" class="space-y-2.5"></div>
         </div>
-
       </div>
 
-      <!-- RIGHT COLUMN (SIDEBAR BANNER + 24/7 CHANNELS GRID) - 4 COLS -->
+      <!-- SIDEBAR COLUMN -->
       <div class="lg:col-span-4 space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
+          <div class="flex items-center justify-between text-slate-400 text-[10px] uppercase font-semibold mb-2">
+            <span>Sidebar Ad</span>
+            <span id="sidebar-ad-timer" class="text-brand-accent">Rotates in: 15s</span>
+          </div>
+          <div id="ad-slot-sidebar" class="w-full h-[250px] bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center overflow-hidden"></div>
+        </div>
 
-        <!-- ================= SIDEBAR VERTICAL AD BANNER SLOT ================= -->
-        <div class="bg-slate-900 border border-slate-8
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+          <h3 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+            <i class="fa-solid fa-tv text-emerald-400"></i> 24/7 Channels
+          </h3>
+          <div class="grid grid-cols-2 gap-2.5" id="channels-grid"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- AD MODAL -->
+  <div id="ad-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-xl rounded-xl p-6 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="text-lg font-bold text-white">Ad Banner Manager</h3>
+        <button onclick="closeAdModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+      </div>
+      <form id="add-ad-form" onsubmit="handleAddNewAd(event)" class="space-y-3">
+        <input type="text" id="ad-title" placeholder="Ad Banner Title" required class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-white">
+        <input type="url" id="ad-target-url" placeholder="Target Link (https://...)" class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-white">
+        <textarea id="ad-content" rows="2" placeholder="Image URL or Iframe Code" required class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-white"></textarea>
+        <button type="submit" class="w-full bg-amber-500 text-slate-950 font-bold py-2 rounded">Add Ad to Rotation</button>
+      </form>
+      <div class="flex justify-end">
+        <button onclick="closeAdModal()" class="bg-slate-800 text-white px-4 py-2 rounded text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    const matchesData = [
+      {
+        id: 'm1',
+        category: 'Cricket',
+        league: 'ICC Live Feed',
+        team1: 'India', flag1: '🇮🇳',
+        team2: 'Australia', flag2: '🇦🇺',
+        status: 'LIVE',
+        servers: [
+          'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT',
+          'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig'
+        ]
+      },
+      {
+        id: 'm2',
+        category: 'Football',
+        league: 'Champions League',
+        team1: 'Real Madrid', flag1: '🇪🇸',
+        team2: 'Barcelona', flag2: '🇪🇸',
+        status: 'LIVE',
+        servers: [
+          'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig',
+          'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT'
+        ]
+      }
+    ];
+
+    const channelsData = [
+      { name: 'Red Bull TV', icon: 'fa-bolt', color: 'text-amber-400', stream: 'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT' },
+      { name: 'Sports HQ', icon: 'fa-tv', color: 'text-sky-400', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig' }
+    ];
+
+    const initialAdPool = [
+      { id: 'ad1', title: 'Banner 1', targetUrl: '#', content: 'https://placehold.co/728x90/1e293b/38bdf8?text=Veedzi+Sports+Ad+1' },
+      { id: 'ad2', title: 'Banner 2', targetUrl: '#', content: 'https://placehold.co/728x90/064e3b/34d399?text=Veedzi+Sports+Ad+2' }
+    ];
+
+    let adPool = JSON.parse(localStorage.getItem('veedzi_ads')) || initialAdPool;
+    let currentAdIndex = 0;
+    let currentActiveMatch = matchesData[0];
+
+    function loadMatchStream(matchId) {
+      const match = matchesData.find(m => m.id === matchId);
+      if (!match) return;
+      currentActiveMatch = match;
+      document.getElementById('current-stream-title').textContent = `${match.team1} vs ${match.team2} - Live`;
+      document.getElementById('main-player').src = match.servers[0];
+      renderMatchesList(matchesData);
+    }
+
+    function switchServer(serverNum) {
+      if (!currentActiveMatch || !currentActiveMatch.servers) return;
+      const url = currentActiveMatch.servers[serverNum - 1] || currentActiveMatch.servers[0];
+      document.getElementById('main-player').src = url;
+      
+      for(let i=1; i<=3; i++) {
+        const btn = document.getElementById(`srv-${i}`);
+        if(btn) btn.className = i === serverNum ? 'px-2.5 py-1 rounded bg-emerald-600 text-white font-semibold' : 'px-2.5 py-1 rounded bg-slate-800 text-slate-300';
+      }
+    }
+
+    function renderMatchesList(data) {
+      const container = document.getElementById('matches-list');
+      if (!container) return;
+      container.innerHTML = '';
+      data.forEach(m => {
+        const isActive = currentActiveMatch && currentActiveMatch.id === m.id;
+        const item = document.createElement('div');
+        item.onclick = () => loadMatchStream(m.id);
+        item.className = `p-3 rounded-lg border cursor-pointer flex items-center justify-between ${isActive ? 'bg-slate-800 border-emerald-500' : 'bg-slate-950 border-slate-800'}`;
+        item.innerHTML = `<span class="text-xs font-bold text-white">${m.flag1} ${m.team1} vs ${m.flag2} ${m.team2}</span><span class="px-2 py-0.5 bg-red-600/20 text-red-400 text-[10px] font-bold rounded">LIVE</span>`;
+        container.appendChild(item);
+      });
+    }
+
+    function renderChannelsGrid() {
+      const grid = document.getElementById('channels-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      channelsData.forEach(ch => {
+        const btn = document.createElement('button');
+        btn.onclick = () => { document.getElementById('main-player').src = ch.stream; };
+        btn.className = 'p-2.5 bg-slate-950 border border-slate-800 rounded hover:bg-slate-800 text-left';
+        btn.innerHTML = `<i class="fa-solid ${ch.icon} ${ch.color}"></i> <span class="text-xs font-semibold text-slate-200 ml-2">${ch.name}</span>`;
+        grid.appendChild(btn);
+      });
+    }
+
+    function rotateAds() {
+      if (adPool.length === 0) return;
+      const topAd = adPool[currentAdIndex % adPool.length];
+      const playerAd = adPool[(currentAdIndex + 1) % adPool.length];
+      const sidebarAd = adPool[(currentAdIndex + 2) % adPool.length];
+
+      document.getElementById('ad-slot-top').innerHTML = `<a href="${topAd.targetUrl}" target="_blank"><img src="${topAd.content}" class="w-full h-full object-cover"></a>`;
+      document.getElementById('ad-slot-player').innerHTML = `<a href="${playerAd.targetUrl}" target="_blank"><img src="${playerAd.content}" class="w-full h-full object-cover"></a>`;
+      document.getElementById('ad-slot-sidebar').innerHTML = `<a href="${sidebarAd.targetUrl}" target="_blank"><img src="${sidebarAd.content}" class="w-full h-full object-cover"></a>`;
+
+      currentAdIndex = (currentAdIndex + 1) % adPool.length;
+    }
+
+    function openAdModal() { document.getElementById('ad-modal').classList.remove('hidden'); }
+    function closeAdModal() { document.getElementById('ad-modal').classList.add('hidden'); }
+
+    function handleAddNewAd(e) {
+      e.preventDefault();
+      const title = document.getElementById('ad-title').value;
+      const targetUrl = document.getElementById('ad-target-url').value;
+      const content = document.getElementById('ad-content').value;
+      adPool.push({ id: 'ad_'+Date.now(), title, targetUrl, content });
+      localStorage.setItem('veedzi_ads', JSON.stringify(adPool));
+      closeAdModal();
+      rotateAds();
+    }
+
+    window.onload = function() {
+      renderMatchesList(matchesData);
+      renderChannelsGrid();
+      rotateAds();
+      setInterval(rotateAds, 12000);
+    };
+  </script>
+</body>
+</html>
