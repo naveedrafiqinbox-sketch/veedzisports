@@ -571,38 +571,6 @@
       }
     ];
 
-    const channelsData = [
-      { name: 'Sky Sports Main Event', icon: 'fa-tv', color: 'text-sky-400', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig' },
-      { name: 'Willow TV Cricket', icon: 'fa-baseball-bat-ball', color: 'text-emerald-400', stream: 'https://www.youtube.com/embed/21X5lGlDOfg' },
-      { name: 'Star Sports 1 HD', icon: 'fa-star', color: 'text-amber-400', stream: 'https://www.youtube.com/embed/fJ9rUzIMcZQ' },
-      { name: 'Sony Ten 1 HD', icon: 'fa-bolt', color: 'text-blue-400', stream: 'https://www.youtube.com/embed/21X5lGlDOfg' },
-      { name: 'PTV Sports Live', icon: 'fa-globe', color: 'text-green-500', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig' },
-      { name: 'SuperSport Grandstand', icon: 'fa-trophy', color: 'text-purple-400', stream: 'https://www.youtube.com/embed/fJ9rUzIMcZQ' }
-    ];
-
-    /* ================= 2. AD MANAGEMENT SYSTEM ================= */
-    // Default initial mock banner ads
-    const initialAdPool = [
-      {
-        id: 'ad1',
-        title: '1xBet - 100% Sports Bonus',
-        targetUrl: 'https://example.com/register',
-        content: 'https://placehold.co/728x90/1e293b/38bdf8?text=1xBet+Sportsbook+%7C+100%25+Welcome+Bonus+Now'
-      },
-      {
-        id: 'ad2',
-        title: 'Bet365 Live Streaming Ads',
-        targetUrl: 'https://example.com/bet365',
-        content: 'https://placehold.co/728x90/064e3b/34d399?text=Bet365+Live+In-Play+Odds+%7C+Claim+Offer'
-      },
-      {
-        id: 'ad3',
-        title: 'Parimatch High Odds',
-        targetUrl: 'https://example.com/parimatch',
-        content: 'https://placehold.co/728x90/78350f/fbbf24?text=PariMatch+Best+Cricket+Odds+%7C+Bet+Now'
-      }
-    ];
-
     let adPool = JSON.parse(localStorage.getItem('cric_ad_pool')) || initialAdPool;
     let currentAdIndex = 0;
     let rotationIntervalSeconds = 12; // Dynamic rotation every 12 seconds
@@ -617,11 +585,9 @@
       const container = document.getElementById(slotElementId);
       if (!container || !adItem) return;
 
-      // Check if content is full HTML snippet (iframe/script) or direct image URL
       if (adItem.content.trim().startsWith('<') || adItem.content.includes('iframe')) {
         container.innerHTML = adItem.content;
       } else {
-        // Image banner fallback
         const linkWrapper = document.createElement('a');
         linkWrapper.href = adItem.targetUrl || '#';
         linkWrapper.target = '_blank';
@@ -644,7 +610,6 @@
     function rotateAllAds() {
       if (adPool.length === 0) return;
 
-      // Pick current ad & shifted indices for variety
       const topAd = adPool[currentAdIndex % adPool.length];
       const playerAd = adPool[(currentAdIndex + 1) % adPool.length];
       const sidebarAd = adPool[(currentAdIndex + 2) % adPool.length];
@@ -666,7 +631,6 @@
           adCountdown = rotationIntervalSeconds;
         }
 
-        // Update timer labels UI
         const timerTexts = document.querySelectorAll('#top-ad-timer, #player-ad-timer, #sidebar-ad-timer, #footer-ad-timer');
         timerTexts.forEach(el => {
           if (el) el.textContent = `Rotates in: ${adCountdown}s`;
@@ -685,13 +649,10 @@
       document.getElementById('current-stream-title').textContent = `${match.team1} vs ${match.team2} - ${match.league}`;
       document.getElementById('current-category').textContent = match.category;
       
-      // Load primary server stream URL
       const iframe = document.getElementById('main-player');
       iframe.src = match.servers[0];
 
       document.getElementById('player-status-text').textContent = 'Signal HD Stable (Server 1)';
-
-      // Highlight active match card
       renderMatchesList(matchesData);
     }
 
@@ -703,7 +664,6 @@
       document.getElementById('main-player').src = url;
       document.getElementById('player-status-text').textContent = `Signal HD Connected (Server ${serverNum})`;
 
-      // Update button highlights
       for (let i = 1; i <= 4; i++) {
         const btn = document.getElementById(`srv-${i}`);
         if (btn) {
@@ -755,15 +715,10 @@
             : 'bg-slate-950/60 border-slate-800/80 hover:bg-slate-800/50'
         }`;
 
-    /* ================= FOOTER ================= */
-    <footer class="bg-slate-900 border-t border-slate-800 mt-12 py-8 text-xs text-slate-400">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div>
-          <span class="text-base font-bold text-white">Veezi<span class="text-emerald-400">Sports</span> Network</span>
-          <p class="text-slate-500 mt-1">Free Live Sports Streaming, Cricket, Football & F1 Streams.</p>
-        </div>
-            
-            <div class="border-l border-slate-800 pl-3">
+        item.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 rounded-full ${isActive ? 'bg-emerald-400 animate-ping' : 'bg-slate-600'}"></div>
+            <div>
               <div class="text-[11px] text-emerald-400 font-semibold uppercase tracking-wider">${m.league}</div>
               <div class="text-xs font-bold text-white flex items-center gap-2 mt-0.5">
                 <span>${m.flag1} ${m.team1}</span>
@@ -772,7 +727,6 @@
               </div>
             </div>
           </div>
-
           <div class="shrink-0 flex items-center gap-2">
             ${m.status === 'LIVE' 
               ? '<span class="px-2 py-1 bg-red-600/20 text-red-400 border border-red-500/30 rounded text-[10px] font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> WATCH</span>'
@@ -873,9 +827,8 @@
 
       adPool.push(newAd);
       saveAdsToStorage();
-      rotateAllAds(); // Instantly apply
+      rotateAllAds();
 
-      // Clear Form
       document.getElementById('add-ad-form').reset();
     }
 
