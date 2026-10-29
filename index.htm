@@ -9,6 +9,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <!-- Monetag Service Worker Registration Script -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(registration) {
+          console.log('Monetag Service Worker registered successfully:', registration.scope);
+        })
+        .catch(function(error) {
+          console.log('Service Worker registration failed:', error);
+        });
+    }
+  </script>
+
   <style>
     body { font-family: 'Inter', sans-serif; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -68,7 +81,7 @@
             <span class="bg-red-500/20 text-red-400 text-[10px] font-bold uppercase px-2 py-0.5 rounded animate-pulse">LIVE NOW</span>
             <h2 id="current-stream-title" class="text-sm sm:text-base font-bold text-white truncate">England vs Sri Lanka - Live HD Stream</h2>
           </div>
-          <span class="text-xs text-emerald-400 font-semibold"><i class="fa-solid signal"></i> HD Connected</span>
+          <span class="text-xs text-emerald-400 font-semibold"><i class="fa-solid fa-signal"></i> HD Connected</span>
         </div>
 
         <div class="bg-black aspect-video-container relative">
@@ -136,7 +149,6 @@
   </main>
 
   <script>
-    // Is list mein aap mazeed live matches aur unke streaming links add kar sakte hain
     const liveMatches = [
       { id: 'm1', title: 'England vs Sri Lanka - Live Test Match', league: 'International Cricket', url: 'https://daddylive1.cx/my/stream-65.php' },
       { id: 'm2', title: 'Star Sports 1 HD - Live Broadcast', league: 'Cricket Special', url: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig' },
