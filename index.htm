@@ -53,9 +53,9 @@
       <!-- Category Filter Buttons -->
       <nav class="hidden md:flex space-x-2 text-sm font-semibold">
         <button onclick="filterMatches('all')" id="cat-all" class="px-3 py-1.5 rounded bg-emerald-600 text-white transition">All Matches</button>
-        <button onclick="filterMatches('Cricket')" id="cat-Cricket" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🏏 Cricket</button>
-        <button onclick="filterMatches('Football')" id="cat-Football" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition">⚽ Football</button>
-        <button onclick="filterMatches('Tennis')" id="cat-Tennis" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🎾 Tennis</button>
+        <button onclick="filterMatches('Cricket')" id="cat-Cricket" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Cricket</button>
+        <button onclick="filterMatches('Football')" id="cat-Football" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Football</button>
+        <button onclick="filterMatches('Tennis')" id="cat-Tennis" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Tennis</button>
       </nav>
 
       <button onclick="openAdModal()" class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs px-3 py-2 rounded-lg font-semibold flex items-center gap-1.5">
@@ -138,7 +138,7 @@
         <button onclick="closeAdModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
       </div>
       <form id="add-ad-form" onsubmit="handleAddNewAd(event)" class="space-y-3 text-xs">
-        <input type="text" id="ad-title" placeholder="Banner Title (e.g. Bet365)" required class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+        <input type="text" id="ad-title" placeholder="Banner Title" required class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
         <input type="url" id="ad-target-url" placeholder="Target Link (https://...)" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
         <textarea id="ad-content" rows="2" placeholder="Image URL or <iframe> snippet" required class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white font-mono"></textarea>
         <button type="submit" class="w-full bg-amber-500 text-slate-950 font-bold py-2 rounded">Add Ad to Rotation Pool</button>
@@ -151,14 +151,13 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // CricHD Style Embedded Channels & Live Match Data Mapping
     const matchesData = [
       {
         id: 'm1',
         category: 'Cricket',
         league: 'Star Sports 1 HD',
-        team1: 'Star Sports 1', flag1: '🏏',
-        team2: 'Live Broadcast', flag2: '📺',
+        team1: 'Star Sports 1',
+        team2: 'Live Broadcast',
         servers: [
           'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig',
           'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT'
@@ -168,40 +167,28 @@
         id: 'm2',
         category: 'Cricket',
         league: 'Ten Sports HD',
-        team1: 'Ten Sports', flag1: '🏏',
-        team2: 'Cricket Live', flag2: '🇵🇰',
+        team1: 'Ten Sports',
+        team2: 'Cricket Live',
         servers: [
-          'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig',
           'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig'
         ]
       },
       {
         id: 'm3',
-        category: 'Cricket',
-        league: 'PTV Sports Live',
-        team1: 'PTV Sports', flag1: '🇵🇰',
-        team2: 'Live Match', flag2: '🏆',
+        category: 'Football',
+        league: 'Sky Sports Football',
+        team1: 'Sky Sports',
+        team2: 'Premier League',
         servers: [
-          'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig'
+          'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT'
         ]
       },
       {
         id: 'm4',
-        category: 'Football',
-        league: 'Sky Sports Football',
-        team1: 'Sky Sports', flag1: '⚽',
-        team2: 'Premier League', flag2: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
-        servers: [
-          'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT',
-          'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig'
-        ]
-      },
-      {
-        id: 'm5',
         category: 'Tennis',
         league: 'Tennis Channel HD',
-        team1: 'Grand Slam Live', flag1: '🎾',
-        team2: 'Court Feed', flag2: '⭐',
+        team1: 'Grand Slam Live',
+        team2: 'Court Feed',
         servers: [
           'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig'
         ]
@@ -211,10 +198,8 @@
     const channelsData = [
       { name: 'Star Sports 1', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-star', cat: 'Cricket' },
       { name: 'Ten Sports', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-baseball-bat-ball', cat: 'Cricket' },
-      { name: 'PTV Sports', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-globe', cat: 'Cricket' },
       { name: 'Sky Sports Football', stream: 'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT', icon: 'fa-futbol', cat: 'Football' },
-      { name: 'Tennis HD', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-table-tennis-paddle-ball', cat: 'Tennis' },
-      { name: 'Red Bull Sports', stream: 'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT', icon: 'fa-bolt', cat: 'All' }
+      { name: 'Tennis HD', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-table-tennis-paddle-ball', cat: 'Tennis' }
     ];
 
     let initialAdPool = [
@@ -238,7 +223,7 @@
         div.innerHTML = `
           <div>
             <span class="text-[10px] text-emerald-400 font-bold uppercase">${m.league}</span>
-            <div class="text-xs font-bold text-white mt-0.5">${m.flag1} ${m.team1} vs ${m.flag2} ${m.team2}</div>
+            <div class="text-xs font-bold text-white mt-0.5">${m.team1} vs ${m.team2}</div>
           </div>
           <span class="px-2 py-0.5 bg-red-600/20 text-red-400 border border-red-500/30 text-[10px] font-bold rounded animate-pulse">LIVE</span>
         `;
@@ -270,7 +255,6 @@
     }
 
     function filterMatches(category) {
-      // Update Category active button styling
       ['all', 'Cricket', 'Football', 'Tennis'].forEach(cat => {
         const btn = document.getElementById(`cat-${cat}`);
         if(btn) {
@@ -334,7 +318,7 @@
       renderMatchesList(matchesData);
       renderChannelsGrid();
       rotateAds();
-      setInterval(rotateAds, 12000); // 12 seconds ad banner rotation
+      setInterval(rotateAds, 12000);
     };
   </script>
 </body>
