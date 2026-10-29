@@ -81,7 +81,6 @@
             <span class="text-slate-400 mr-1">Servers:</span>
             <button onclick="switchServer(1)" id="srv-1" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-semibold">S1</button>
             <button onclick="switchServer(2)" id="srv-2" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700">S2</button>
-            <button onclick="switchServer(3)" id="srv-3" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700">S3</button>
           </div>
         </div>
 
@@ -102,28 +101,54 @@
       <!-- MATCHES FIXTURES -->
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
         <h3 class="text-base font-bold text-white mb-3 flex items-center gap-2">
-          <i class="fa-solid fa-tower-broadcast text-red-500"></i> Live Sports Fixtures & Channels
+          <i class="fa-solid fa-tower-broadcast text-red-500"></i> Live Cricket & Sports Channels
         </h3>
         <div id="matches-list" class="space-y-2.5"></div>
       </div>
     </div>
 
-    <!-- RIGHT SIDEBAR (CHANNELS & AD) -->
+    <!-- RIGHT SIDEBAR (LIVE SCORE WIDGET + CHANNELS & AD) -->
     <div class="lg:col-span-4 space-y-6">
       
+      <!-- LIVE SCORE WIDGET -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle text-red-500 text-xs animate-pulse"></i> Live Cricket Score
+          </h3>
+          <span class="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded font-bold">MATCH LIVE</span>
+        </div>
+        <div class="space-y-3 text-xs">
+          <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+            <div class="text-slate-400 text-[11px] font-semibold mb-1">ICC Champions Trophy / T20 Live</div>
+            <div class="flex justify-between items-center font-bold text-white mb-1">
+              <span>India (IND)</span>
+              <span class="text-emerald-400">245/4 (42.3 Ov)</span>
+            </div>
+            <div class="flex justify-between items-center text-slate-300">
+              <span>Australia (AUS)</span>
+              <span class="text-slate-400">Yet to bat / Target 280</span>
+            </div>
+            <div class="mt-2 pt-2 border-t border-slate-800/80 text-[11px] text-slate-400 italic">
+              Status: India won the toss & elected to bat first.
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- SIDEBAR AD -->
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-center">
         <div class="flex justify-between text-[10px] text-slate-400 uppercase font-semibold mb-1">
           <span>Sidebar Ad Banner</span>
           <span id="sidebar-ad-timer" class="text-blue-400">Rotates in: 15s</span>
         </div>
-        <div id="ad-slot-sidebar" class="w-full h-[250px] bg-slate-950 border border-slate-800 rounded flex items-center justify-center overflow-hidden"></div>
+        <div id="ad-slot-sidebar" class="w-full h-[220px] bg-slate-950 border border-slate-800 rounded flex items-center justify-center overflow-hidden"></div>
       </div>
 
       <!-- 24/7 CHANNELS -->
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
         <h3 class="text-base font-bold text-white mb-3 flex items-center gap-2">
-          <i class="fa-solid fa-tv text-emerald-400"></i> Popular Live Channels
+          <i class="fa-solid fa-tv text-emerald-400"></i> Global Sports Channels
         </h3>
         <div class="grid grid-cols-2 gap-2" id="channels-grid"></div>
       </div>
@@ -155,9 +180,9 @@
       {
         id: 'm1',
         category: 'Cricket',
-        league: 'Star Sports 1 HD',
+        league: 'Star Sports 1 HD (Live)',
         team1: 'Star Sports 1',
-        team2: 'Live Broadcast',
+        team2: 'Cricket Feed',
         servers: [
           'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig',
           'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT'
@@ -166,15 +191,25 @@
       {
         id: 'm2',
         category: 'Cricket',
-        league: 'Ten Sports HD',
-        team1: 'Ten Sports',
-        team2: 'Cricket Live',
+        league: 'Willow TV / Ten Sports',
+        team1: 'Willow Cricket',
+        team2: 'Global Stream',
         servers: [
           'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig'
         ]
       },
       {
         id: 'm3',
+        category: 'Cricket',
+        league: 'PTV Sports / A-Sports',
+        team1: 'PTV Sports',
+        team2: 'Live Match',
+        servers: [
+          'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig'
+        ]
+      },
+      {
+        id: 'm4',
         category: 'Football',
         league: 'Sky Sports Football',
         team1: 'Sky Sports',
@@ -184,7 +219,7 @@
         ]
       },
       {
-        id: 'm4',
+        id: 'm5',
         category: 'Tennis',
         league: 'Tennis Channel HD',
         team1: 'Grand Slam Live',
@@ -197,9 +232,9 @@
 
     const channelsData = [
       { name: 'Star Sports 1', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-star', cat: 'Cricket' },
-      { name: 'Ten Sports', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-baseball-bat-ball', cat: 'Cricket' },
-      { name: 'Sky Sports Football', stream: 'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT', icon: 'fa-futbol', cat: 'Football' },
-      { name: 'Tennis HD', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-table-tennis-paddle-ball', cat: 'Tennis' }
+      { name: 'Willow TV', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-baseball-bat-ball', cat: 'Cricket' },
+      { name: 'PTV Sports', stream: 'https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig', icon: 'fa-globe', cat: 'Cricket' },
+      { name: 'Sky Sports', stream: 'https://www.redbull.com/embed/v3/tv/live/rrn:content:live-events:3a0f1fa8-1f14-411a-8e2b-231a48c6883e/en-INT', icon: 'fa-futbol', cat: 'Football' }
     ];
 
     let initialAdPool = [
@@ -245,13 +280,6 @@
       if (!currentActiveMatch || !currentActiveMatch.servers) return;
       const url = currentActiveMatch.servers[serverNum - 1] || currentActiveMatch.servers[0];
       document.getElementById('main-player').src = url;
-      
-      for(let i=1; i<=3; i++) {
-        const btn = document.getElementById(`srv-${i}`);
-        if(btn) {
-          btn.className = i === serverNum ? 'px-2.5 py-1 rounded bg-emerald-600 text-white font-semibold' : 'px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700';
-        }
-      }
     }
 
     function filterMatches(category) {
@@ -278,7 +306,7 @@
         const btn = document.createElement('button');
         btn.onclick = () => { 
           document.getElementById('main-player').src = ch.stream;
-          document.getElementById('current-stream-title').textContent = `${ch.name} - 24/7 Live`;
+          document.getElementById('current-stream-title').textContent = `${ch.name} - Live Stream`;
           document.getElementById('current-category').textContent = ch.cat;
         };
         btn.className = 'p-2.5 bg-slate-950 border border-slate-800 rounded hover:bg-slate-900 text-left flex items-center gap-2 transition';
